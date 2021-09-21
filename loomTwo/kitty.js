@@ -13,7 +13,7 @@ let kittyId = 1;
 // information isn't stored on the blockchain, just their webserver.
 // If everything was stored on a blockchain, we wouldn't have to worry
 // about the server going down, them changing their API, or the company 
-// blocking us from loading their assets if they don't like our zombie game ;)
+// blocking us from loading their assets if they don't like our zombie game ;))
 let apiUrl = "https://api.cryptokitties.co/kitties/" + kittyId
 $.get(apiUrl, function(data) {
   let imgUrl = data.image_url
