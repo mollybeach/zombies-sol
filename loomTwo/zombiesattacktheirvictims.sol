@@ -230,6 +230,34 @@ Put it to the test
 1. First we need to make sure that _targetDna isn't longer than 16 digits. To do this, we can set _targetDna equal to _targetDna % dnaModulus to only take the last 16 digits.
 2. Next our function should declare a uint named newDna, and set it equal to the average of myZombie's DNA and _targetDna (as in the example above).Note: You can access the properties of myZombie using myZombie.name and myZombie.dna
 3. Once we have the new DNA, let's call _createZombie. You can look at the zombiefactory.sol tab if you forget which parameters this function needs to call it. Note that it requires a name, so let's set our new zombie's name to "NoName" for now — we can write a function to change zombies' names later.
-Note: For you Solidity whizzes, you may notice a problem with our code here! Don't worry, we'll fix this in the next chapter ;)
+For you Solidity whizzes, you may notice a problem with our code here! Don't worry, we'll fix this in the next chapter ;)
 
+
+Chapter 9: More on Function Visibility
+The code in our previous lesson has a mistake!
+If you try compiling it, the compiler will throw an error.
+The issue is we tried calling the _createZombie function from within ZombieFeeding, but _createZombie is a private function inside ZombieFactory. This means none of the contracts that inherit from ZombieFactory can access it.
+Internal and External
+In addition to public and private, Solidity has two more types of visibility for functions: internal and external.
+internal is the same as private, except that it's also accessible to contracts that inherit from this contract. (Hey, that sounds like what we want here!).
+external is similar to public, except that these functions can ONLY be called outside the contract — they can't be called by other functions inside that contract. We'll talk about why you might want to use external vs public later.
+For declaring internal or external functions, the syntax is the same as private and public:
+contract Sandwich {
+  uint private sandwichesEaten = 0;
+  function eat() internal {
+    sandwichesEaten++;
+  }
+}
+
+contract BLT is Sandwich {
+  uint private baconSandwichesEaten = 0;
+
+  function eatWithBacon() public returns (string memory) {
+    baconSandwichesEaten++;
+    // We can call this here because it's internal
+    eat();
+  }
+}
+Put it to the test
+1. Change _createZombie() from private to internal so our other contract can access it.We've already focused you back to the proper tab, zombiefactory.sol.
 */

@@ -19,7 +19,7 @@ contract ZombieFactory {
     mapping (uint => address) public zombieToOwner; //keeps track of that address that owns the zombie
     mapping (address => uint) ownerZombieCount; //how many zombies the owner has 
 
-    function _createZombie(string memory _name, uint _dna) private {
+    function _createZombie(string memory _name, uint _dna) internal {
         uint id = zombies.push(Zombie(_name, _dna)) - 1;
         //start 
         zombieToOwner[id] = msg.sender;
