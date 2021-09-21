@@ -31,4 +31,10 @@ contract ZombieFeeding is ZombieFactory {
         uint newDna = (myZombie.dna + _targetDna) /2; //average of the two dnas
         _createZombie("NoName", newDna); 
     }
+      // define function here
+    function feedOnKitty(uint _zombieId, uint _kittyId) public {
+        uint kittyDna; //we only care about one of the values returned from KittyInterface which is kittyDna
+        (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+        feedAndMultiply(_zombieId, kittyDna); 
+    }
 } 
