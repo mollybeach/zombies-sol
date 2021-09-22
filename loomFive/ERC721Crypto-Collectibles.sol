@@ -695,4 +695,8 @@ This lesson concludes our game's Solidity code! (For now — we may add even mor
 In the next 2 lessons, we're going to look at how to deploy your contracts and interact with them using web3.js (so you can build a front-end for your DApp).
 
 Go ahead and rename any of your zombies if you like, then proceed to the next chapter to complete the lesson.
+Congratulations! You have completed Lesson 5 of CryptoZombies!
+Achievements Unlocked:
+
+You received H4XF13LD MORRIS 💯💯😎💯💯, a level 10 CryptoZombie!
  */
