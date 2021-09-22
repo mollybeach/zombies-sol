@@ -18,7 +18,11 @@ contract KittyInterface {
 }
 
 contract ZombieFeeding is ZombieFactory {
-
+    //1. Create modifier here
+    modifier ownerOf(uint _zombieId) {
+        require(msg.sender == zombieToOwner[_zombieId]);
+        _;
+    }
   // 1. Remove this:
     //address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;
   // 2. Change this to just a declaration:    KittyInterface kittyContract = KittyInterface(ckAddress); ->    KittyInterface kittyContract;
@@ -39,8 +43,9 @@ contract ZombieFeeding is ZombieFactory {
         return(_zombie.readyTime <= now);
     }
     //make internal so contract more secure
-    function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal {
-        require(msg.sender == zombieToOwner[_zombieId]);
+    function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal ownerOf(_zombieId) {
+         // 3. Remove this line
+        //require(msg.sender == zombieToOwner[_zombieId]);
         Zombie storage myZombie = zombies[_zombieId];
         // 2. Add a check for `_isReady` here
         require(_isReady(myZombie));
