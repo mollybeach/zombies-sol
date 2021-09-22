@@ -70,7 +70,7 @@ contract ZombieHelper is ZombieFeeding {
     require(zombies[_zombieId].level >= _level);
 
 
-    Chapter 2: Withdraws
+Chapter 2    : Withdraws
 In the previous chapter, we learned how to send Ether to a contract. So what happens after you send it?
 
 After you send Ether to a contract, it gets stored in the contract's Ethereum account, and it will be trapped there — unless you add a function to withdraw the Ether from the contract.
@@ -124,5 +124,27 @@ contract ZombieHelper is ZombieFeeding {
   modifier aboveLevel(uint _level, uint _zombieId) {
     require(zombies[_zombieId].level >= _level);
 
+Chapter 3: Zombie Battles
+Now that we've learned about payable functions and contract balances, it's time to add functionality for zombie battles!
+
+Following the format from previous chapters, we'll organize our code by creating a new file / contract for the attack functionality that imports from the previous contract.
+
+Put it to the test
+Let's review creating a new contract. Repetition leads to mastery!
+
+If you can't remember the syntax for doing these, check zombiehelper.sol for the syntax — but try to do it without peeking first to test your knowledge.
+
+Declare at the top of the file that we're using Solidity version >=0.5.0 <0.6.0.
+
+import from zombiehelper.sol.
+
+Declare a new contract called ZombieAttack that inherits from ZombieHelper. Leave the contract body empty for now.
+
+zombieattack.sol
+zombiehelper.sol
+zombiefeeding.sol
+zombiefactory.sol
+ownable.sol
+1
 
 */
