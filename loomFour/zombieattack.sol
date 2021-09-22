@@ -26,4 +26,5 @@ contract ZombieAttack is ZombieHelper {
         _triggerCooldown(myZombie);
 }
 }
+
 }

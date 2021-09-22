@@ -537,6 +537,27 @@ ownable.sol
 
 attack
 1 of 3
+Chapter 12: Wrapping It Up
+Congratulations! That concludes Lesson 4.
 
+Go ahead and test out your battle function to the right!!
+
+Claim your reward
+After winning the battle:
+
+Your zombie will level up
+
+Your zombie will increase his winCount
+
+You will spawn a new zombie to add to your army!
+
+Go ahead and try the battle, then proceed to the next chapter to complete the lesson.
+
+
+ALLTROLLSGOTOHEAVENQ
+A LEVEL 3 CRYPTOZOMBIE
+
+CUTIEPEPPER
+A LEVEL 2 CRYPTOZOMBIE
 
 */
