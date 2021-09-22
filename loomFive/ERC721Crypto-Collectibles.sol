@@ -287,5 +287,43 @@ contract ZombieOwnership is ZombieAttack, ERC721 {
 
   function balanceOf(address _owner) external view returns (uint256) {
 
+Chapter 7: ERC721: Approve
+Now, let's implement approve.
+
+Remember, with approve the transfer happens in 2 steps:
+
+You, the owner, call approve and give it the _approved address of the new owner, and the _tokenId you want him to take.
+
+The new owner calls transferFrom with the _tokenId. Next, the contract checks to make sure the new owner has been already approved, and then transfers him the token.
+
+Because this happens in 2 function calls, we need to use the zombieApprovals data structure to store who's been approved for what in between function calls.
+
+Putting it to the Test
+In the approve function, we want to make sure only the owner of the token can give someone approval to take it. So we need to add the onlyOwnerOf modifier to approve
+
+For the body of the function, set zombieApprovals for _tokenId equal to the _approved address.
+
+zombieownership.sol
+zombieattack.sol
+zombiehelper.sol
+zombiefeeding.sol
+zombiefactory.sol
+ownable.sol
+erc721.sol
+12345678910111213141516
+pragma solidity >=0.5.0 <0.6.0;
+
+import "./zombieattack.sol";
+import "./erc721.sol";
+
+contract ZombieOwnership is ZombieAttack, ERC721 {
+
+  mapping (uint => address) zombieApprovals;
+
+  function balanceOf(address _owner) external view returns (uint256) {
+
+ERC721 & Crypto-Collectibles
+
+ ERC721 & Crypto-Collectibles
 
  */
