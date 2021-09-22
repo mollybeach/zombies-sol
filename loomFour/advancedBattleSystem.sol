@@ -540,7 +540,7 @@ attack
 Chapter 12: Wrapping It Up
 Congratulations! That concludes Lesson 4.
 
-Go ahead and test out your battle function to the right!!
+Go ahead and test out your battle function to the right!!!
 
 Claim your reward
 After winning the battle:
