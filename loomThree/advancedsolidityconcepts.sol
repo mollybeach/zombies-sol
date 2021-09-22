@@ -680,4 +680,84 @@ Give NoName a new name and press 'Save'
 
 Congratulations! You have completed Lesson 3 of CryptoZombies!
 
+
+Chapter 8: Back to Attack!
+Enough refactoring — back to zombieattack.sol.
+
+We're going to continue defining our attack function, now that we have the ownerOf modifier to use.
+
+Put it to the test
+Add the ownerOf modifier to attack to make sure the caller owns _zombieId.
+
+The first thing our function should do is get a storage pointer to both zombies so we can more easily interact with them:
+
+a. Declare a Zombie storage named myZombie, and set it equal to zombies[_zombieId].
+
+b. Declare a Zombie storage named enemyZombie, and set it equal to zombies[_targetId].
+
+We're going to use a random number between 0 and 99 to determine the outcome of our battle. So declare a uint named rand, and set it equal to the result of the randMod function with 100 as an argument.
+
+zombieattack.sol
+zombiehelper.sol
+zombiefeeding.sol
+zombiefactory.sol
+ownable.sol
+12345678910111213141516
+pragma solidity >=0.5.0 <0.6.0;
+
+import "./zombiehelper.sol";
+
+contract ZombieAttack is ZombieHelper {
+  uint randNonce = 0;
+  uint attackVictoryProbability = 70;
+
+  function randMod(uint _modulus) internal returns(uint) {
+    randNonce++;
+
+calldata
+No Results
+
+Chapter 9: Zombie Wins and Losses
+For our zombie game, we're going to want to keep track of how many battles our zombies have won and lost. That way we can maintain a "zombie leaderboard" in our game state.
+
+We could store this data in a number of ways in our DApp — as individual mappings, as leaderboard Struct, or in the Zombie struct itself.
+
+Each has its own benefits and tradeoffs depending on how we intend on interacting with the data. In this tutorial, we're going to store the stats on our Zombie struct for simplicity, and call them winCount and lossCount.
+
+So let's jump back to zombiefactory.sol, and add these properties to our Zombie struct.
+
+Put it to the test
+Modify our Zombie struct to have 2 more properties:
+
+a. winCount, a uint16
+
+b. lossCount, also a uint16
+
+Note: Remember, since we can pack uints inside structs, we want to use the smallest uints we can get away with. A uint8 is too small, since 2^8 = 256 — if our zombies attacked once per day, they could overflow this within a year. But 2^16 is 65536 — so unless a user wins or loses every day for 179 years straight, we should be safe here.
+
+Now that we have new properties on our Zombie struct, we need to change our function definition in _createZombie().
+
+Change the zombie creation definition so it creates each new zombie with 0 wins and 0 losses.
+
+zombiefactory.sol
+zombieattack.sol
+zombiehelper.sol
+zombiefeeding.sol
+ownable.sol
+12345678910111213141516
+pragma solidity >=0.5.0 <0.6.0;
+
+import "./ownable.sol";
+
+contract ZombieFactory is Ownable {
+
+    event NewZombie(uint zombieId, string name, uint dna);
+
+    uint dnaDigits = 16;
+    uint dnaModulus = 10 ** dnaDigits;
+
+attack
+1 of 3
+
+
 */
