@@ -678,4 +678,6 @@ A LEVEL 2 CRYPTOZOMBIE
 
 Give NoName a new name and press 'Save'
 
+Congratulations! You have completed Lesson 3 of CryptoZombies!
+
 */
