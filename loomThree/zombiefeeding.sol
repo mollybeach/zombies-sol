@@ -51,7 +51,7 @@ contract ZombieFeeding is ZombieFactory {
     }
         _createZombie("NoName", newDna);
         //3. call trigger cool down
-        _triggerCooldown(myZombie)
+        _triggerCooldown(myZombie);
     }
 
     function feedOnKitty(uint _zombieId, uint _kittyId) public {

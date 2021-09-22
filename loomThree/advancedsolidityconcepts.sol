@@ -375,6 +375,106 @@ contract KittyInterface {
     uint256 cooldownIndex,
     uint256 nextActionAt,
 
+Chapter 8: More on Function Modifiers
+Great! Our zombie now has a functional cooldown timer.
+
+Next, we're going to add some additional helper methods. We've created a new file for you called zombiehelper.sol, which imports zombiefeeding.sol. This will help to keep our code organized.
+
+Let's make it so zombies gain special abilities after reaching a certain level. But in order to do that, first we'll need to learn a little bit more about function modifiers.
+
+Function modifiers with arguments
+Previously we looked at the simple example of onlyOwner. But function modifiers can also take arguments. For example:
+
+// A mapping to store a user's age:
+mapping (uint => uint) public age;
+
+// Modifier that requires this user to be older than a certain age:
+modifier olderThan(uint _age, uint _userId) {
+  require(age[_userId] >= _age);
+  _;
+}
+
+// Must be older than 16 to drive a car (in the US, at least).
+// We can call the `olderThan` modifier with arguments like so:
+function driveCar(uint _userId) public olderThan(16, _userId) {
+  // Some function logic
+}
+You can see here that the olderThan modifier takes arguments just like a function does. And that the driveCar function passes its arguments to the modifier.
+
+Let's try making our own modifier that uses the zombie level property to restrict access to special abilities.
+
+Put it to the test
+In ZombieHelper, create a modifier called aboveLevel. It will take 2 arguments, _level (a uint) and _zombieId (also a uint).
+
+The body should check to make sure zombies[_zombieId].level is greater than or equal to _level.
+
+Remember to have the last line of the modifier call the rest of the function with _;.
+
+zombiehelper.sol
+zombiefeeding.sol
+zombiefactory.sol
+ownable.sol
+12345678910
+pragma solidity >=0.5.0 <0.6.0;
+
+import "./zombiefeeding.sol";
+
+contract ZombieHelper is ZombieFeeding {
+
+  // Start here
+
+}
+
+Advanced Solidity Concepts
+
+Chapter 9: Zombie Modifiers
+Now let's use our aboveLevel modifier to create some functions.
+
+Our game will have some incentives for people to level up their zombies:
+
+For zombies level 2 and higher, users will be able to change their name.
+For zombies level 20 and higher, users will be able to give them custom DNA.
+We'll implement these functions below. Here's the example code from the previous lesson for reference:
+
+// A mapping to store a user's age:
+mapping (uint => uint) public age;
+
+// Require that this user be older than a certain age:
+modifier olderThan(uint _age, uint _userId) {
+  require (age[_userId] >= _age);
+  _;
+}
+
+// Must be older than 16 to drive a car (in the US, at least)
+function driveCar(uint _userId) public olderThan(16, _userId) {
+  // Some function logic
+}
+Put it to the test
+Create a function called changeName. It will take 2 arguments: _zombieId (a uint), and _newName (a string with the data location set to calldata ), and make it external. It should have the aboveLevel modifier, and should pass in 2 for the _level parameter. (Don't forget to also pass the _zombieId).
+Note: calldata is somehow similar to memory, but it's only available to external functions.
+
+In this function, first we need to verify that msg.sender is equal to zombieToOwner[_zombieId]. Use a require statement.
+
+Then the function should set zombies[_zombieId].name equal to _newName.
+
+Create another function named changeDna below changeName. Its definition and contents will be almost identical to changeName, except its second argument will be _newDna (a uint), and it should pass in 20 for the _level parameter on aboveLevel. And of course, it should set the zombie's dna to _newDna instead of setting the zombie's name.
+
+zombiehelper.sol
+zombiefeeding.sol
+zombiefactory.sol
+ownable.sol
+123456789101112131415
+pragma solidity >=0.5.0 <0.6.0;
+
+import "./zombiefeeding.sol";
+
+contract ZombieHelper is ZombieFeeding {
+
+  modifier aboveLevel(uint _level, uint _zombieId) {
+    require(zombies[_zombieId].level >= _level);
+    _;
+  }
+
 
 
 */
